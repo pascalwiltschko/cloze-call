@@ -648,7 +648,8 @@ a {
   gap: 12px;
   align-items: flex-start;
   padding: 18px 19px;
-  margin-top: 24px;
+  max-width: 750px;
+  margin: 24px auto 0;
   border-left: 2px solid #b17151;
   background: #1a2015;
   color: #d3dbc4;
