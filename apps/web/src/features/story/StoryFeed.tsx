@@ -1,10 +1,11 @@
 import { useEffect, useRef } from "react";
 import { motion, useReducedMotion } from "motion/react";
-import { ArrowRight, Check, MessageSquareText, X } from "lucide-react";
+import { ArrowRight, Check, X } from "lucide-react";
 import type { FeedbackEntry, StoryRun } from "@cloze-call/shared";
 import { Button } from "@/components/ui/button";
 import { ChallengeView } from "./ChallengeView";
 import { EndingView } from "./EndingView";
+import { StoryOpening } from "./StoryOpening";
 
 interface Props {
   run: StoryRun;
@@ -42,13 +43,7 @@ export function StoryFeed({ run, busy, committedId, onChoose, onAnswer, onReset 
 
   return (
     <div className="story-feed" id="story-top">
-      <div className="setup-message">
-        <div className="setup-label">
-          <MessageSquareText size={13} />
-          YOUR OPENING
-        </div>
-        <p>{run.prompt}</p>
-      </div>
+      <StoryOpening prompt={run.prompt} />
       {run.entries.map((entry) => {
         const sceneIndex = entry.kind === "scene" ? ++sceneNumber : sceneNumber;
         return (

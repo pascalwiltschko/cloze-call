@@ -219,6 +219,9 @@ export class StoryService {
     event: StoryEvent,
     exercises: Exercise[],
   ): void {
+    const loadingMessage = narration.loadingMessage?.trim();
+    session.view.loadingMessage =
+      loadingMessage && loadingMessage.length <= 100 ? loadingMessage : "Hold your breath…";
     session.summary = narration.summary;
     session.actions = [];
     session.challenge = null;

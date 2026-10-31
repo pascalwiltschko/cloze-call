@@ -3,6 +3,7 @@ import type { Exercise } from "../domain/exercises.ts";
 import type { StoryEvent } from "../domain/rules.ts";
 
 export const narrationSchema = z.object({
+  loadingMessage: z.string().optional(),
   title: z.string().min(1).max(100),
   narration: z.string().min(30).max(1800),
   summary: z.string().min(1).max(700),

@@ -50,6 +50,7 @@ export const runSchema = z.object({
   phase: z.enum(["choosing", "answering", "ended"]),
   entries: z.array(transcriptEntrySchema),
   pendingOptionId: id.nullable(),
+  loadingMessage: z.string().trim().min(1).max(100).optional(),
 });
 export const startStorySchema = z.object({ prompt: z.string().trim().min(1).max(2000) });
 export const chooseActionSchema = z.object({ revision: z.int().nonnegative(), actionId: id });

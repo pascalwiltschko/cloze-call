@@ -18,6 +18,7 @@ EVENT RULES:
 
 OUTPUT RULES:
 - title: a short cinematic scene title.
+- loadingMessage: a brief atmospheric line (3–8 words, at most 100 characters) to display during the NEXT wait. Refer only to the current setting or already established sensory details. No new events, action results, future outcomes, spoilers, instructions, or technical language. It must fit any action or answer the player might choose.
 - narration: only the visible scene/consequence; never reveal game rules, odds, vocabulary answers, or future outcomes.
 - summary: cumulative factual memory, at most 300 characters, preserving the objective, current location, pursuer, and important prior events.
 - actions: exactly three for opening/continue; an empty array for recovery/escaped/dead.
@@ -42,7 +43,10 @@ export function createOllamaNarrator(config: AppConfig): Narrator {
     ["human", "{sceneRequest}"],
   ]);
   const chain = prompt.pipe(
-    model.withStructuredOutput(narrationSchema, { method: "jsonSchema", name: "horror_scene" }),
+    model.withStructuredOutput(
+      narrationSchema.extend({ loadingMessage: z.string().min(1).max(100) }),
+      { method: "jsonSchema", name: "horror_scene" },
+    ),
   );
   return {
     narrate: async (request) =>

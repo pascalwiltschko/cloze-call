@@ -7,6 +7,7 @@ import type { ModelStatus } from "@cloze-call/shared";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { OpeningScreen } from "@/features/story/OpeningScreen";
+import { StoryOpening } from "@/features/story/StoryOpening";
 import { StoryFeed } from "@/features/story/StoryFeed";
 import { useStory } from "@/features/story/use-story";
 import { api } from "@/lib/api";
@@ -30,13 +31,12 @@ function StoryPage() {
   const navigate = useNavigate();
   const reducedMotion = useReducedMotion();
   const story = useStory(storyId ?? null);
-  const [starting, setStarting] = useState(false);
+  const starting = story.busy === "starting";
   const [startError, setStartError] = useState(false);
   async function start() {
-    setStarting(true);
     setStartError(false);
     const next = await story.start(prompt);
-    setStarting(false);
+    if (window.location.pathname !== "/stories/new") return;
     if (next) void navigate(`/stories/${next.id}`, { replace: true });
     else setStartError(true);
   }
@@ -119,6 +119,11 @@ function StoryPage() {
                   unavailable={model?.available === false}
                 />
               )}
+              {storyId === "new" && !story.run && prompt.trim() && (
+                <div className="story-feed">
+                  <StoryOpening prompt={prompt.trim()} />
+                </div>
+              )}
               {storyId && story.run && (
                 <StoryFeed
                   run={story.run}
@@ -138,7 +143,9 @@ function StoryPage() {
                   <LoaderCircle size={17} className="motion-safe:animate-spin" />
                   <div>
                     <span>
-                      {story.busy === "resuming" ? "Finding your place…" : "Hold your breath…"}
+                      {story.busy === "resuming"
+                        ? "Finding your place…"
+                        : story.run?.loadingMessage || "Hold your breath…"}
                     </span>
                   </div>
                 </div>

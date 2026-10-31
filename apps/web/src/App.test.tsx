@@ -1,4 +1,4 @@
-import { render, screen, waitFor, within } from "@testing-library/react";
+import { act, render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it, vi } from "vite-plus/test";
 import { App } from "./App";
@@ -113,11 +113,67 @@ describe("continuous story experience", () => {
     await user.click(screen.getByRole("button", { name: /enter the scene/i }));
     await waitFor(() => expect(screen.queryByRole("textbox")).not.toBeInTheDocument());
     expect(screen.getByText("Hold your breath…")).toBeInTheDocument();
+    expect(screen.getByText("Alien")).toBeInTheDocument();
+    expect(screen.getAllByText("YOUR OPENING")).toHaveLength(1);
     expect(screen.queryByText("TRY A STARTING POINT")).not.toBeInTheDocument();
     finish(fixture.opening);
     await screen.findByText(fixture.scene.text);
     expect(window.location.pathname).toBe(`/stories/${fixture.opening.id}`);
     expect(localStorage.getItem("cloze-call:current-story")).toBeNull();
+    expect(screen.getAllByText("YOUR OPENING")).toHaveLength(1);
+    expect(screen.getByText(fixture.opening.prompt)).toBeInTheDocument();
+  });
+
+  it("stays home when an abandoned opening finishes after browser back", async () => {
+    const fixture = storyFixture();
+    let finish!: (run: typeof fixture.opening) => void;
+    vi.mocked(api.start).mockReturnValue(
+      new Promise((resolve) => {
+        finish = resolve;
+      }),
+    );
+    const user = userEvent.setup();
+    render(<App />);
+    await user.type(screen.getByRole("textbox"), "Alien");
+    await user.click(screen.getByRole("button", { name: /enter the scene/i }));
+    await screen.findByText("Hold your breath…");
+    act(() => {
+      window.history.back();
+    });
+    await waitFor(() => expect(window.location.pathname).toBe("/"));
+    await screen.findByRole("textbox");
+    await act(async () => {
+      finish(fixture.opening);
+    });
+    expect(window.location.pathname).toBe("/");
+    expect(screen.getByRole("textbox")).toBeInTheDocument();
+    expect(screen.queryByText(fixture.scene.text)).not.toBeInTheDocument();
+  });
+
+  it("uses the prepared atmosphere while an answer is pending", async () => {
+    const fixture = storyFixture();
+    vi.mocked(api.start).mockResolvedValue(fixture.opening);
+    vi.mocked(api.choose).mockResolvedValue({
+      ...fixture.selected,
+      loadingMessage: "The pines whisper…",
+    });
+    let finish!: (run: typeof fixture.ended) => void;
+    vi.mocked(api.answer).mockReturnValue(
+      new Promise((resolve) => {
+        finish = resolve;
+      }),
+    );
+    const user = userEvent.setup();
+    render(<App />);
+    await user.type(screen.getByRole("textbox"), "Crystal Lake");
+    await user.click(screen.getByRole("button", { name: /enter the scene/i }));
+    await user.click(await screen.findByRole("button", { name: /hide behind the fallen pine/i }));
+    const choices = await screen.findByRole("group", { name: "Choose the missing word" });
+    await user.click(within(choices).getByRole("button", { name: /keep/ }));
+    await user.click(screen.getByRole("button", { name: /commit answer/i }));
+    expect(screen.getByText("The pines whisper…")).toBeInTheDocument();
+    finish(fixture.ended);
+    await screen.findByRole("heading", { name: "You made it out." });
   });
 
   it("keeps home independent of another tab's saved story", () => {

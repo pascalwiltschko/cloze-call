@@ -9,6 +9,9 @@ if (!status.available) throw new Error(status.message);
 const service = new StoryService(createOllamaNarrator(config), () => 0);
 const started = performance.now();
 const opening = await service.start(starterPrompts[0].prompt);
+if (!opening.loadingMessage || opening.loadingMessage === "Hold your breath…")
+  throw new Error("The live model did not provide a usable atmospheric loading line.");
+console.log(`Prepared loading line: ${opening.loadingMessage}`);
 const scene = opening.entries.find((entry) => entry.kind === "scene")!;
 const selected = service.choose(opening.id, opening.revision, scene.actions[0]!.id);
 console.log(

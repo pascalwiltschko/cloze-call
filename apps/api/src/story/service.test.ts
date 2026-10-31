@@ -40,6 +40,32 @@ function option(run: StoryRun, text: string): string {
 }
 
 describe("story service", () => {
+  it("prepares loading copy without another narration call and preserves it through selection", async () => {
+    const narrator = fakeNarrator();
+    const original = narrator.narrate;
+    narrator.narrate = vi.fn(async (request) => ({
+      ...(await original(request)),
+      loadingMessage: "  The pines whisper…  ",
+    }));
+    const service = new StoryService(narrator);
+    const opening = await service.start("Crystal Lake woods.");
+    expect(opening.loadingMessage).toBe("The pines whisper…");
+    expect(choose(service, opening).loadingMessage).toBe(opening.loadingMessage);
+    expect(narrator.narrate).toHaveBeenCalledTimes(1);
+    expect(service.get(opening.id).loadingMessage).toBe(opening.loadingMessage);
+  });
+
+  it.each([undefined, "   ", "x".repeat(101)])(
+    "falls back for unusable loading copy: %s",
+    async (loadingMessage) => {
+      const narrator = fakeNarrator();
+      const original = narrator.narrate;
+      narrator.narrate = async (request) => ({ ...(await original(request)), loadingMessage });
+      const service = new StoryService(narrator);
+      expect((await service.start("Crystal Lake woods.")).loadingMessage).toBe("Hold your breath…");
+    },
+  );
+
   it("reveals the cloze only after an action and keeps answer keys private", async () => {
     const service = new StoryService(fakeNarrator());
     const opening = await service.start("An original chase at Crystal Lake.");

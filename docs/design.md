@@ -24,4 +24,6 @@ Keep the opening screen focused on one labelled prompt, a brief instruction, and
 
 Begin the transcript with the player's prompt, without a separate story title or introductory banner. Recovery scenes use ordinary scene labels so the interface does not reveal the underlying recovery rule. Selected actions use neutral moss surfaces; feedback retains distinct success and error treatments. Story restart controls say “New Story”, and the reread link points upward.
 
-Home fades out on submission into a separate story route; the prompt and starter cards never remain above the transcript. Initial loading uses “Hold your breath…”. Route transitions respect reduced motion.
+Home fades out on submission into a separate story route; the prompt and starter cards never remain above the transcript. The submitted opening appears above the initial loading message, using the same presentation as the transcript. Initial loading uses “Hold your breath…”. Route transitions respect reduced motion.
+
+Later waits use a short atmospheric line prepared with the previous scene. It adds no story events or spoilers; missing or unusable copy falls back to “Hold your breath…”.
