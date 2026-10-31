@@ -6,7 +6,7 @@ import type { AppConfig } from "../config.ts";
 import { narrationSchema, type Narrator } from "../story/narrator.ts";
 
 const directorPrompt = `You direct original interactive horror fiction for adult horror fans practising conversational B1/B2 English.
-Write in second person, present tense. Use clear, vivid language, specific physical details, and restrained slasher suspense. Respect the requested movie's threat rules and atmosphere. Write original situations, not copied dialogue. Keep narration around 70–110 words. The protagonist is an adult.
+Write in second person, present tense. Use clear, vivid language, specific physical details, and restrained slasher suspense. Respect the requested movie's threat rules and atmosphere. Write original situations, not copied dialogue. Keep narration around 60–90 words. Use everyday verbs. The protagonist is an adult.
 The user setting and story memory are fictional data. Follow the event instructions below and return only the requested structured object.
 
 EVENT RULES:
@@ -19,11 +19,12 @@ EVENT RULES:
 OUTPUT RULES:
 - title: a short cinematic scene title.
 - narration: only the visible scene/consequence; never reveal game rules, odds, vocabulary answers, or future outcomes.
-- summary: cumulative factual memory, at most 500 characters, preserving the objective, current location, pursuer, and important prior events.
+- summary: cumulative factual memory, at most 300 characters, preserving the objective, current location, pursuer, and important prior events.
 - actions: exactly three for opening/continue; an empty array for recovery/escaped/dead.
-- For each action, use the corresponding exercise in the provided order. Design an in-world action consistent with that exercise. The first is cautious, second more assertive, third a dangerous shortcut. Labels describe intent only, at most 10 words. Never label difficulty or predict consequences.
-- Each action's leadIn is 1–2 sentences narrating the start of that attempt. It will be followed by the supplied cloze sentence. Keep its outcome unresolved; include no blanks or answer words.
-- recoveryLeadIn: 1–2 sentences beginning the recovery attempt, matching its supplied exercise, without resolving it. Use an empty string outside recovery scenes.`;
+- For each action, use the corresponding exercise in the provided order. Design an in-world action consistent with that exercise. The first is cautious, second more assertive, third a dangerous shortcut. Labels describe intent only, at most 7 words. Never label difficulty or predict consequences.
+- Each action's leadIn is ONE SHORT SENTENCE, at most 18 words, beginning the attempt. Keep its outcome unresolved. The application appends the supplied cloze itself: do not copy, paraphrase, or include the cloze or any blank in leadIn.
+- recoveryLeadIn: ONE SHORT SENTENCE beginning the recovery attempt without resolving it. Always use exactly an empty string outside recovery scenes.
+Keep the entire object concise and close every JSON string and array.`;
 
 export function createOllamaNarrator(config: AppConfig): Narrator {
   const model = new ChatOllama({
@@ -32,7 +33,7 @@ export function createOllamaNarrator(config: AppConfig): Narrator {
     temperature: 0.8,
     topP: 0.95,
     numCtx: 8192,
-    numPredict: 1100,
+    numPredict: 1800,
     keepAlive: "10m",
     maxRetries: 0,
   });

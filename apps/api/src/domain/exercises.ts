@@ -146,6 +146,12 @@ export function createChallenge(
   actionLabel: string,
   recovery: boolean,
 ): InternalChallenge {
+  const introduction = leadIn
+    .replace(exercise.sentence, "")
+    .split(/(?<=[.!?])\s+/)
+    .filter((sentence) => !sentence.includes("___"))
+    .join(" ")
+    .trim();
   const options = exercise.choices.map((text) => ({ id: randomUUID(), text }));
   for (let i = options.length - 1; i > 0; i--) {
     const j = randomInt(i + 1);
@@ -155,7 +161,7 @@ export function createChallenge(
     view: {
       kind: "challenge",
       id: randomUUID(),
-      attempt: `${leadIn}\n\n${exercise.sentence}`,
+      attempt: introduction ? `${introduction}\n\n${exercise.sentence}` : exercise.sentence,
       options,
     },
     correctOptionId: options.find((option) => option.text === exercise.answer)!.id,
