@@ -26,7 +26,7 @@ apps/api/src/
 packages/shared/src/   public Zod contracts and starter prompt content
 ```
 
-The frontend session controller handles side effects and safe retries; presentation components receive public run entries and callbacks. A transcript is append-only during play. The browser stores only the current run ID and reloads the authoritative run on refresh.
+The frontend session controller handles side effects and safe retries; presentation components receive public run entries and callbacks. A transcript is append-only during play. React Router identifies each run at `/stories/:storyId` and reloads the authoritative run on refresh. Home at `/` is independent in every tab; no shared current-run pointer is stored. `/stories/new` holds the opening request until the API returns a run ID.
 
 Actions and their exercise introductions are generated with a scene, but only action IDs and labels are initially projected. Selecting one reveals its prepared challenge without another inference request. Answer options receive shuffled opaque IDs. Keys stay inside the API until resolved feedback is appended.
 

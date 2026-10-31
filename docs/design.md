@@ -23,3 +23,5 @@ The feed follows new entries when the reader is near the bottom and preserves th
 Keep the opening screen focused on one labelled prompt, a brief instruction, and optional starter cards with general section labels. Avoid promotional headings, captions, and slogans. The footer shows the exact configured model tag from the API and the app version from the root package manifest.
 
 Begin the transcript with the player's prompt, without a separate story title or introductory banner. Recovery scenes use ordinary scene labels so the interface does not reveal the underlying recovery rule. Selected actions use neutral moss surfaces; feedback retains distinct success and error treatments. Story restart controls say “New Story”, and the reread link points upward.
+
+Home fades out on submission into a separate story route; the prompt and starter cards never remain above the transcript. Initial loading uses “Hold your breath…”. Route transitions respect reduced motion.

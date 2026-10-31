@@ -1,40 +1,31 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { StoryRun } from "@cloze-call/shared";
-import { api, ApiError } from "@/lib/api";
+import { api } from "@/lib/api";
 
-const storageKey = "cloze-call:current-story";
-function readSavedId(): string | null {
-  try {
-    return localStorage.getItem(storageKey);
-  } catch {
-    return null;
-  }
-}
-function remember(id: string | null) {
-  try {
-    if (id) localStorage.setItem(storageKey, id);
-    else localStorage.removeItem(storageKey);
-  } catch {
-    /* The story also works without browser storage. */
-  }
-}
 export type BusyState = "starting" | "choosing" | "answering" | "resuming" | null;
 
-export function useStory() {
+export function useStory(id: string | null) {
   const [run, setRun] = useState<StoryRun | null>(null);
-  const [busy, setBusy] = useState<BusyState>(() => (readSavedId() ? "resuming" : null));
+  const [busy, setBusy] = useState<BusyState>(id && id !== "new" ? "resuming" : null);
   const [error, setError] = useState<string | null>(null);
   const [committedAnswerId, setCommittedAnswerId] = useState<string | null>(null);
   const inFlight = useRef(false);
   const save = useCallback((next: StoryRun) => {
     setRun(next);
-    remember(next.id);
     setCommittedAnswerId(next.pendingOptionId);
   }, []);
 
   useEffect(() => {
-    const id = readSavedId();
-    if (!id) return;
+    if (!id) {
+      setRun(null);
+      setBusy(null);
+      setError(null);
+      setCommittedAnswerId(null);
+      return;
+    }
+    if (id === "new" || run?.id === id) return;
+    setRun(null);
+    setBusy("resuming");
     let cancelled = false;
     api
       .get(id)
@@ -43,7 +34,6 @@ export function useStory() {
       })
       .catch((cause: unknown) => {
         if (cancelled) return;
-        if (cause instanceof ApiError && cause.status === 404) remember(null);
         setError(cause instanceof Error ? cause.message : "Couldn't resume the story.");
       })
       .finally(() => {
@@ -52,7 +42,7 @@ export function useStory() {
     return () => {
       cancelled = true;
     };
-  }, [save]);
+  }, [id, save, run?.id]);
 
   async function execute(kind: BusyState, operation: () => Promise<StoryRun>, answerId?: string) {
     if (inFlight.current) return;
@@ -61,7 +51,9 @@ export function useStory() {
     setError(null);
     if (answerId) setCommittedAnswerId(answerId);
     try {
-      save(await operation());
+      const next = await operation();
+      save(next);
+      return next;
     } catch (cause) {
       setError(cause instanceof Error ? cause.message : "The scene couldn't finish. Try again.");
       if (run) {
@@ -99,7 +91,6 @@ export function useStory() {
         setRun(null);
         setError(null);
         setCommittedAnswerId(null);
-        remember(null);
       }
     },
   };

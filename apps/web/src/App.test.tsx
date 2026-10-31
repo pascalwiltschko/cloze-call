@@ -13,6 +13,7 @@ vi.mock("@/lib/api", async (importOriginal) => ({
 
 beforeEach(() => {
   localStorage.clear();
+  window.history.replaceState(null, "", "/");
   vi.clearAllMocks();
   vi.mocked(api.model).mockResolvedValue({
     available: true,
@@ -98,9 +99,37 @@ describe("continuous story experience", () => {
     );
   });
 
+  it("replaces the home with loading immediately and gives the story its own URL", async () => {
+    const fixture = storyFixture();
+    let finish!: (run: typeof fixture.opening) => void;
+    vi.mocked(api.start).mockReturnValue(
+      new Promise((resolve) => {
+        finish = resolve;
+      }),
+    );
+    const user = userEvent.setup();
+    render(<App />);
+    await user.type(screen.getByRole("textbox"), "Alien");
+    await user.click(screen.getByRole("button", { name: /enter the scene/i }));
+    await waitFor(() => expect(screen.queryByRole("textbox")).not.toBeInTheDocument());
+    expect(screen.getByText("Hold your breath…")).toBeInTheDocument();
+    expect(screen.queryByText("TRY A STARTING POINT")).not.toBeInTheDocument();
+    finish(fixture.opening);
+    await screen.findByText(fixture.scene.text);
+    expect(window.location.pathname).toBe(`/stories/${fixture.opening.id}`);
+    expect(localStorage.getItem("cloze-call:current-story")).toBeNull();
+  });
+
+  it("keeps home independent of another tab's saved story", () => {
+    localStorage.setItem("cloze-call:current-story", storyFixture().opening.id);
+    render(<App />);
+    expect(screen.getByRole("textbox")).toBeInTheDocument();
+    expect(api.get).not.toHaveBeenCalled();
+  });
+
   it("resumes a committed challenge after a browser refresh", async () => {
     const fixture = storyFixture();
-    localStorage.setItem("cloze-call:current-story", fixture.selected.id);
+    window.history.replaceState(null, "", `/stories/${fixture.selected.id}`);
     vi.mocked(api.get).mockResolvedValue({
       ...fixture.selected,
       pendingOptionId: fixture.challenge.options[0]!.id,
