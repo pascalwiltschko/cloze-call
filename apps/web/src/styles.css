@@ -117,15 +117,12 @@ a {
   font-size: 31px;
   letter-spacing: 1px;
 }
-.wordmark > svg {
-  color: #a6ad97;
-}
-.wordmark-call {
-  margin-left: 3px;
-}
-.wordmark-period {
-  margin-left: -9px;
-  color: #dc6c57;
+.app-logo {
+  display: block;
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  flex-shrink: 0;
 }
 .header-right {
   display: flex;

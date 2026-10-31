@@ -1,7 +1,7 @@
 import packageInfo from "../../../package.json";
 import { useEffect, useState } from "react";
 import { MotionConfig } from "motion/react";
-import { ArrowLeft, Clapperboard, LoaderCircle, RefreshCw, TriangleAlert } from "lucide-react";
+import { ArrowLeft, LoaderCircle, RefreshCw, TriangleAlert } from "lucide-react";
 import type { ModelStatus } from "@cloze-call/shared";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
@@ -50,11 +50,8 @@ export function App() {
             }}
             aria-label="Cloze Call home"
           >
-            <Clapperboard size={21} />
-            <span>
-              CLOZE<span className="wordmark-call">CALL</span>
-            </span>
-            <span className="wordmark-period">.</span>
+            <img src="/cloze-call-icon.png" alt="" className="app-logo" width={64} height={64} />
+            <span>Cloze_Call</span>
           </a>
           <div className="header-right">
             {story.run && (
