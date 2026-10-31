@@ -1,0 +1,28 @@
+{
+  "name": "final-cut",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently --kill-others -n api,web -c green,red \"pnpm --filter @final-cut/api dev\" \"pnpm --filter @final-cut/web dev\"",
+    "check": "vp check --deny-warnings",
+    "typecheck": "pnpm -r typecheck",
+    "format": "vp fmt",
+    "test": "vp test run",
+    "test:watch": "vp test",
+    "build": "pnpm -r build",
+    "verify": "pnpm check && pnpm typecheck && pnpm test && pnpm build",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "concurrently": "^9.2.1",
+    "husky": "^9.1.7",
+    "typescript": "catalog:",
+    "vite-plus": "catalog:"
+  },
+  "engines": {
+    "node": ">=24.11.0 <25"
+  },
+  "packageManager": "pnpm@11.8.0"
+}
