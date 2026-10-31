@@ -1,3 +1,4 @@
+import packageInfo from "../../../package.json";
 import { useEffect, useState } from "react";
 import { MotionConfig } from "motion/react";
 import { ArrowLeft, Clapperboard, LoaderCircle, RefreshCw, TriangleAlert } from "lucide-react";
@@ -20,7 +21,7 @@ export function App() {
     } catch {
       setModel({
         available: false,
-        model: "Gemma",
+        model: "Model unavailable",
         message: "The local API isn't responding. Start the development server, then check again.",
       });
     }
@@ -65,17 +66,9 @@ export function App() {
                 className="new-story-button"
               >
                 <ArrowLeft size={13} />
-                New screening
+                New Story
               </Button>
             )}
-            <span className={`connection-chip ${model?.available ? "connected" : ""}`}>
-              <span className="connection-dot" />
-              {model === null
-                ? "CONNECTING"
-                : model.available
-                  ? "GEMMA · LOCAL"
-                  : "NARRATOR OFFLINE"}
-            </span>
           </div>
         </header>
         <main id="main-content" className="main-content">
@@ -151,10 +144,12 @@ export function App() {
           )}
         </main>
         <footer className="site-footer">
-          <span>A LITTLE ENGLISH. A LONG WAY FROM SAFE.</span>
-          <span>
-            LOCAL BY DESIGN <span className="footer-cross">+</span> MADE FOR HORROR FANS
+          <span className={`connection-chip ${model?.available ? "connected" : ""}`}>
+            <span className="connection-dot" />
+            {model === null ? "Connecting…" : (model.model ?? "Model unavailable")}
+            {model && !model.available && " · Offline"}
           </span>
+          <span>v{packageInfo.version}</span>
         </footer>
       </div>
     </MotionConfig>

@@ -137,7 +137,6 @@ a {
   align-items: center;
   gap: 8px;
   font-size: 10px;
-  letter-spacing: 1.2px;
   color: var(--muted-foreground);
   white-space: nowrap;
 }
@@ -158,42 +157,6 @@ a {
   width: min(860px, calc(100% - 64px));
   margin: 0 auto;
   flex: 1;
-}
-.opening-hero {
-  padding: 68px 0 38px;
-}
-.eyebrow {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 1.65px;
-  color: #b4bba6;
-  margin: 0 0 23px;
-}
-.tiny-cross {
-  color: #d46a54;
-  font-family: var(--font-display);
-  font-size: 20px;
-  line-height: 10px;
-}
-.opening-hero h1 {
-  font-family: var(--font-display);
-  font-weight: 400;
-  font-size: clamp(46px, 7.5vw, 77px);
-  line-height: 0.98;
-  letter-spacing: -0.8px;
-  margin: 0 0 24px;
-}
-.opening-hero h1 > span {
-  color: #d66b57;
-}
-.hero-copy {
-  color: #b4b6a9;
-  font-size: 15px;
-  line-height: 1.8;
-  margin: 0;
 }
 .section-label {
   display: flex;
@@ -245,17 +208,13 @@ a {
   outline: none;
 }
 .prompt-toolbar {
+  justify-content: flex-end;
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: 16px;
   padding: 11px 13px 11px 20px;
   background: #141811;
   border-top: 1px solid #33392e;
-}
-.prompt-toolbar > span {
-  color: #949d87;
-  font-size: 11px;
 }
 .enter-button {
   height: 40px;
@@ -343,36 +302,6 @@ a {
   font-size: 11px;
   margin-top: auto;
 }
-.starter-caption {
-  color: #8f9882;
-  font-size: 10px;
-  line-height: 1.6;
-  margin: 12px 0 0;
-}
-.how-it-works {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 18px;
-  margin-top: 40px;
-  padding: 20px 0;
-  border-top: 1px solid #30372a;
-  border-bottom: 1px solid #30372a;
-}
-.how-it-works > span {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  color: #a7b098;
-  font-size: 11px;
-}
-.how-it-works i {
-  font-family: var(--font-display);
-  font-size: 21px;
-  font-style: normal;
-  color: #c7755f;
-}
 .site-footer {
   width: min(1060px, calc(100% - 80px));
   display: flex;
@@ -385,30 +314,26 @@ a {
   letter-spacing: 1px;
   line-height: 1.8;
 }
-.footer-cross {
-  color: #b5795c;
-  margin: 0 7px;
+.opening-screen {
+  padding-top: 44px;
+}
+.opening-title {
+  font-family: var(--font-display);
+  font-size: clamp(34px, 5vw, 44px);
+  font-weight: 400;
+  line-height: 1.1;
+  margin: 0 0 12px;
+}
+.opening-help {
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--muted-foreground);
+  margin: 0 0 22px;
 }
 .story-feed {
+  padding-top: 36px;
   max-width: 750px;
   margin: 0 auto;
-}
-.story-heading {
-  margin: 48px 0 28px;
-}
-.story-heading .eyebrow {
-  margin-bottom: 12px;
-}
-.story-heading h1 {
-  font-family: var(--font-display);
-  font-size: clamp(36px, 5vw, 49px);
-  line-height: 1.1;
-  font-weight: 400;
-  margin: 0 0 8px;
-}
-.story-heading > p:last-child {
-  font-size: 12px;
-  color: var(--muted-foreground);
 }
 .setup-message {
   border-left: 2px solid #8b5542;
@@ -459,13 +384,6 @@ a {
   color: #d5dbca;
   margin: 0;
 }
-.recovery-badge {
-  border-color: #896643;
-  color: #dfb489;
-  font-size: 9px;
-  font-weight: 400;
-  letter-spacing: 1px;
-}
 .story-actions {
   display: flex;
   flex-direction: column;
@@ -509,16 +427,16 @@ a {
   max-width: 92%;
   margin: 25px 0 24px auto;
   padding: 13px 17px;
-  background: #34251d;
-  border: 1px solid #654736;
+  background: var(--secondary);
+  border: 1px solid #48513e;
   border-radius: 7px 7px 0 7px;
-  color: #e3cab4;
+  color: #d5dbca;
   font-size: 13px;
   line-height: 1.7;
 }
 .chosen-action > svg {
   flex-shrink: 0;
-  color: #d08b67;
+  color: var(--sage);
 }
 .challenge-card {
   padding: 23px;
@@ -770,22 +688,8 @@ a {
   .header-right {
     gap: 10px;
   }
-  .connection-chip {
-    display: none;
-  }
   .main-content {
     width: calc(100% - 32px);
-  }
-  .opening-hero {
-    padding: 44px 0 30px;
-  }
-  .eyebrow {
-    font-size: 9px;
-    letter-spacing: 1.1px;
-    margin-bottom: 19px;
-  }
-  .hero-copy {
-    font-size: 14px;
   }
   .section-label {
     font-size: 9px;
@@ -799,11 +703,6 @@ a {
   .prompt-toolbar {
     padding: 11px 12px;
     gap: 10px;
-  }
-  .prompt-toolbar > span {
-    font-size: 10px;
-    max-width: 44%;
-    line-height: 1.6;
   }
   .enter-button {
     padding: 0 12px;
@@ -828,20 +727,11 @@ a {
   .starter-description {
     padding-bottom: 12px;
   }
-  .how-it-works {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 11px;
-    margin-top: 29px;
-  }
   .site-footer {
     width: calc(100% - 32px);
     margin-top: 32px;
     font-size: 8px;
     gap: 6px;
-  }
-  .story-heading {
-    margin-top: 34px;
   }
   .setup-message {
     padding: 14px 16px;

@@ -1,4 +1,4 @@
-import { ArrowDownRight, ArrowRight, CornerDownLeft } from "lucide-react";
+import { ArrowRight, CornerDownLeft } from "lucide-react";
 import { starterPrompts } from "@cloze-call/shared";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -15,21 +15,6 @@ interface Props {
 export function OpeningScreen({ prompt, onPrompt, onStart, busy, unavailable }: Props) {
   return (
     <div className="opening-screen">
-      <section className="opening-hero" aria-labelledby="opening-title">
-        <p className="eyebrow">
-          <span className="tiny-cross">+</span> INTERACTIVE HORROR / ENGLISH B1–B2
-        </p>
-        <h1 id="opening-title">
-          You know the movie.
-          <br />
-          <span>Survive your version.</span>
-        </h1>
-        <p className="hero-copy">
-          You've watched them make the wrong choice.
-          <br className="hidden sm:block" /> Now it's your turn. Find the words. Make it out.
-        </p>
-      </section>
-
       <form
         className="opening-form"
         onSubmit={(event) => {
@@ -37,15 +22,17 @@ export function OpeningScreen({ prompt, onPrompt, onStart, busy, unavailable }: 
           onStart();
         }}
       >
-        <div className="section-label">
-          <label htmlFor="movie-prompt">SET THE SCENE</label>
-          <span>
-            YOUR CUT STARTS HERE <ArrowDownRight size={13} />
-          </span>
-        </div>
+        <h1 className="opening-title">
+          <label htmlFor="movie-prompt">What's your close call?</label>
+        </h1>
+        <p className="opening-help" id="prompt-help">
+          Describe a movie and situation, then choose actions and complete the missing words to
+          escape.
+        </p>
         <div className="prompt-frame">
           <Textarea
             id="movie-prompt"
+            aria-describedby="prompt-help"
             value={prompt}
             onChange={(event) => onPrompt(event.target.value)}
             disabled={busy}
@@ -66,7 +53,6 @@ export function OpeningScreen({ prompt, onPrompt, onStart, busy, unavailable }: 
             }}
           />
           <div className="prompt-toolbar">
-            <span>A familiar world. An original escape.</span>
             <Button
               type="submit"
               disabled={busy || unavailable || prompt.trim().length < 12}
@@ -84,8 +70,7 @@ export function OpeningScreen({ prompt, onPrompt, onStart, busy, unavailable }: 
 
       <section className="starters-section" aria-labelledby="starters-title">
         <div className="section-label">
-          <h2 id="starters-title">OR START AT CRYSTAL LAKE</h2>
-          <span>FRIDAY THE 13TH, PART 2</span>
+          <h2 id="starters-title">TRY A STARTING POINT</h2>
         </div>
         <div className="starter-grid">
           {starterPrompts.map((starter, index) => (
@@ -116,22 +101,7 @@ export function OpeningScreen({ prompt, onPrompt, onStart, busy, unavailable }: 
             </Card>
           ))}
         </div>
-        <p className="starter-caption">
-          Original openings inspired by the film. Your choices take it from here.
-        </p>
       </section>
-
-      <div className="how-it-works">
-        <span>
-          <i>01</i> Choose an action
-        </span>
-        <span>
-          <i>02</i> Find the missing word
-        </span>
-        <span>
-          <i>03</i> Live with what happens
-        </span>
-      </div>
     </div>
   );
 }
