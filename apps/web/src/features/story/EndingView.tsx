@@ -1,4 +1,4 @@
-import { ArrowUpRight, RotateCcw } from "lucide-react";
+import { ArrowUp, RotateCcw } from "lucide-react";
 import type { EndingEntry, FeedbackEntry } from "@cloze-call/shared";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -47,11 +47,11 @@ export function EndingView({
       <div className="ending-actions">
         <Button onClick={onReset}>
           <RotateCcw size={15} />
-          Another take
+          New Story
         </Button>
         <a href="#story-top" className="read-back">
           Read your story again
-          <ArrowUpRight size={14} />
+          <ArrowUp size={14} />
         </a>
       </div>
     </section>

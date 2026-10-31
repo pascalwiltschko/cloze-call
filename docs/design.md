@@ -17,3 +17,9 @@ VT323 supplies the pixel display face; self-hosted Geist supplies reading and co
 Starter cards fill the textarea without starting inference. The submit button supports Ctrl/Cmd+Enter. Challenge options allow inspection before a separate commit action; after submission the selected answer stays locked through retries. Completed questions retain the selected answer and mark the correct option, with a corrected sentence below an incorrect attempt.
 
 The feed follows new entries when the reader is near the bottom and preserves their position while they read earlier sections. A skip link, labelled input, semantic headings, status announcements, visible focus, and mobile layouts support keyboard and narrow-screen use.
+
+## Prototype cleanup
+
+Keep the opening screen focused on one labelled prompt, a brief instruction, and optional starter cards with general section labels. Avoid promotional headings, captions, and slogans. The footer shows the exact configured model tag from the API and the app version from the root package manifest.
+
+Begin the transcript with the player's prompt, without a separate story title or introductory banner. Recovery scenes use ordinary scene labels so the interface does not reveal the underlying recovery rule. Selected actions use neutral moss surfaces; feedback retains distinct success and error treatments. Story restart controls say “New Story”, and the reread link points upward.

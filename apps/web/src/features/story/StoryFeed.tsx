@@ -1,9 +1,8 @@
 import { useEffect, useRef } from "react";
 import { motion, useReducedMotion } from "motion/react";
-import { ArrowDownRight, ArrowRight, Check, MessageSquareText, X } from "lucide-react";
+import { ArrowRight, Check, MessageSquareText, X } from "lucide-react";
 import type { FeedbackEntry, StoryRun } from "@cloze-call/shared";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { ChallengeView } from "./ChallengeView";
 import { EndingView } from "./EndingView";
 
@@ -43,11 +42,6 @@ export function StoryFeed({ run, busy, committedId, onChoose, onAnswer, onReset 
 
   return (
     <div className="story-feed" id="story-top">
-      <div className="story-heading">
-        <p className="eyebrow">NOW SCREENING · YOUR CUT</p>
-        <h1>{run.title}</h1>
-        <p>The story is yours from here.</p>
-      </div>
       <div className="setup-message">
         <div className="setup-label">
           <MessageSquareText size={13} />
@@ -68,13 +62,7 @@ export function StoryFeed({ run, busy, committedId, onChoose, onAnswer, onReset 
               <section className="narration-section" aria-labelledby={`scene-${entry.id}`}>
                 <div className="scene-label">
                   <span>SCENE {String(sceneIndex).padStart(2, "0")}</span>
-                  {entry.recovery ? (
-                    <Badge variant="outline" className="recovery-badge">
-                      ONE MORE CHANCE
-                    </Badge>
-                  ) : (
-                    <span className="scene-line" />
-                  )}
+                  <span className="scene-line" />
                 </div>
                 <h2 id={`scene-${entry.id}`}>{entry.title}</h2>
                 <p className="narration-copy">{entry.text}</p>
@@ -82,7 +70,6 @@ export function StoryFeed({ run, busy, committedId, onChoose, onAnswer, onReset 
                   <div className="story-actions">
                     <div className="section-label">
                       <span>WHAT DO YOU DO?</span>
-                      <ArrowDownRight size={14} />
                     </div>
                     {entry.actions.map((action, index) => (
                       <Button
