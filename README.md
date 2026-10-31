@@ -39,3 +39,7 @@ The infrastructure baseline lives on `main`; incremental prototype work lives on
 The initial build includes three Crystal Lake starter prompts, procedural narration and action introductions, reviewed B1/B2 exercises, random escape/recovery/death outcomes, a continuous transcript, browser-refresh recovery, and a final vocabulary review. Images and film retrieval are intentionally deferred.
 
 Sessions live in API memory and expire after two idle hours. Restarting the API loses them; the browser stores only a run ID. The small exercise bank repeats on long runs. Gemma's prose and film fidelity remain model-dependent.
+
+## License
+
+Licensed under the [MIT License](LICENSE).

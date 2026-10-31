@@ -2,6 +2,7 @@
   "name": "cloze-call",
   "version": "0.1.0",
   "private": true,
+  "license": "MIT",
   "type": "module",
   "scripts": {
     "dev": "concurrently --kill-others -n api,web -c green,red \"pnpm --filter @cloze-call/api dev\" \"pnpm --filter @cloze-call/web dev\"",
