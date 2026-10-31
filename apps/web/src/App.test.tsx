@@ -22,6 +22,22 @@ beforeEach(() => {
 });
 
 describe("continuous story experience", () => {
+  it("enables submission when a custom opening is typed", async () => {
+    const fixture = storyFixture();
+    vi.mocked(api.start).mockResolvedValue(fixture.opening);
+    const user = userEvent.setup();
+    render(<App />);
+    const submit = screen.getByRole("button", { name: /enter the scene/i });
+    expect(submit).toBeDisabled();
+    await user.type(screen.getByRole("textbox"), "   ");
+    expect(submit).toBeDisabled();
+    await user.clear(screen.getByRole("textbox"));
+    await user.type(screen.getByRole("textbox"), "Alien");
+    expect(submit).toBeEnabled();
+    await user.click(submit);
+    await waitFor(() => expect(api.start).toHaveBeenCalledWith("Alien"));
+  });
+
   it("uses starter cards as prompts and keeps the whole story visible through an ending", async () => {
     const fixture = storyFixture();
     vi.mocked(api.start).mockResolvedValue(fixture.opening);

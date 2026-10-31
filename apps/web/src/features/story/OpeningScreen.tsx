@@ -1,5 +1,5 @@
-import { ArrowRight, CornerDownLeft } from "lucide-react";
-import { starterPrompts } from "@cloze-call/shared";
+import { ArrowRight, ArrowUp, CornerDownLeft, LoaderCircle } from "lucide-react";
+import { starterPrompts, startStorySchema } from "@cloze-call/shared";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
@@ -13,13 +13,14 @@ interface Props {
   unavailable: boolean;
 }
 export function OpeningScreen({ prompt, onPrompt, onStart, busy, unavailable }: Props) {
+  const canSubmit = !busy && !unavailable && startStorySchema.safeParse({ prompt }).success;
   return (
     <div className="opening-screen">
       <form
         className="opening-form"
         onSubmit={(event) => {
           event.preventDefault();
-          onStart();
+          if (canSubmit) onStart();
         }}
       >
         <h1 className="opening-title">
@@ -37,31 +38,29 @@ export function OpeningScreen({ prompt, onPrompt, onStart, busy, unavailable }: 
             onChange={(event) => onPrompt(event.target.value)}
             disabled={busy}
             maxLength={2000}
-            placeholder="Name the movie. Tell us where you are. What's following you?"
+            placeholder="Which movie are you trapped in, and what’s getting closer?"
             className="movie-prompt"
             onKeyDown={(event) => {
-              if (
-                (event.metaKey || event.ctrlKey) &&
-                event.key === "Enter" &&
-                prompt.trim().length >= 12 &&
-                !busy &&
-                !unavailable
-              ) {
+              if ((event.metaKey || event.ctrlKey) && event.key === "Enter" && canSubmit) {
                 event.preventDefault();
                 onStart();
               }
             }}
           />
-          <div className="prompt-toolbar">
-            <Button
-              type="submit"
-              disabled={busy || unavailable || prompt.trim().length < 12}
-              className="enter-button"
-            >
-              {busy ? "Setting the scene…" : "Enter the scene"}
-              <ArrowRight size={16} />
-            </Button>
-          </div>
+          <Button
+            type="submit"
+            variant="ghost"
+            size="icon"
+            disabled={!canSubmit}
+            className="enter-button"
+            aria-label={busy ? "Setting the scene…" : "Enter the scene"}
+            title={busy ? "Setting the scene…" : "Enter the scene"}
+          >
+            {busy ? <LoaderCircle aria-hidden="true" /> : <ArrowUp aria-hidden="true" />}
+          </Button>
+          <span className="sr-only" role="status">
+            {busy ? "Setting the scene…" : ""}
+          </span>
         </div>
         <p className="keyboard-note">
           <CornerDownLeft size={11} /> Ctrl / ⌘ + Enter to begin

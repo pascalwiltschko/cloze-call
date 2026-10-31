@@ -51,7 +51,7 @@ export const runSchema = z.object({
   entries: z.array(transcriptEntrySchema),
   pendingOptionId: id.nullable(),
 });
-export const startStorySchema = z.object({ prompt: z.string().trim().min(12).max(2000) });
+export const startStorySchema = z.object({ prompt: z.string().trim().min(1).max(2000) });
 export const chooseActionSchema = z.object({ revision: z.int().nonnegative(), actionId: id });
 export const answerChallengeSchema = z.object({ revision: z.int().nonnegative(), optionId: id });
 export const apiErrorSchema = z.object({

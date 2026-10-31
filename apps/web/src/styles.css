@@ -178,6 +178,7 @@ a {
   color: #8e9782;
 }
 .prompt-frame {
+  position: relative;
   border: 1px solid #424835;
   background: #1a1e16;
   border-radius: 7px;
@@ -190,7 +191,7 @@ a {
   border: 0;
   border-radius: 0;
   background: transparent !important;
-  padding: 19px 20px;
+  padding: 19px 74px 19px 20px;
   font-size: 15px;
   line-height: 1.85;
   resize: vertical;
@@ -204,20 +205,22 @@ a {
   box-shadow: inset 0 0 0 1px #788465;
   outline: none;
 }
-.prompt-toolbar {
-  justify-content: flex-end;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 11px 13px 11px 20px;
-  background: #141811;
-  border-top: 1px solid #33392e;
-}
 .enter-button {
-  height: 40px;
-  padding: 0 17px;
-  font-size: 12px;
-  letter-spacing: 0.2px;
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border-radius: 50%;
+  color: #d6dccb;
+  background: #303828;
+}
+.enter-button:hover {
+  background: #424e35;
+}
+.enter-button:disabled {
+  opacity: 0.35;
 }
 .keyboard-note {
   display: flex;
@@ -699,16 +702,8 @@ a {
     flex-direction: column;
     gap: 7px;
   }
-  .prompt-toolbar {
-    padding: 11px 12px;
-    gap: 10px;
-  }
-  .enter-button {
-    padding: 0 12px;
-    font-size: 11px;
-  }
   .movie-prompt {
-    padding: 15px;
+    padding: 15px 74px 15px 15px;
     font-size: 14px;
     min-height: 142px;
   }

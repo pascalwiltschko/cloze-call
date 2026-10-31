@@ -16,9 +16,9 @@ describe("API foundation", () => {
     expect(response.status).toBe(200);
     expect(await response.json()).toEqual({ status: "ok", name: "Cloze Call" });
   });
-  it("rejects malformed JSON and incomplete story descriptions", async () => {
+  it("rejects malformed JSON and empty story descriptions", async () => {
     const app = testApp();
-    for (const body of ["{broken", JSON.stringify({ prompt: "short" })]) {
+    for (const body of ["{broken", JSON.stringify({ prompt: "   " })]) {
       const response = await app.request("/api/stories", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -26,6 +26,15 @@ describe("API foundation", () => {
       });
       expect(response.status).toBe(400);
     }
+  });
+  it("accepts a short custom movie prompt", async () => {
+    const response = await testApp().request("/api/stories", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ prompt: "Alien" }),
+    });
+    expect(response.status).toBe(201);
+    expect(await response.json()).toMatchObject({ prompt: "Alien" });
   });
   it("returns a structured error for expired stories", async () => {
     const response = await testApp().request("/api/stories/missing");
