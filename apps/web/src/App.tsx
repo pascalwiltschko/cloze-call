@@ -93,7 +93,7 @@ function StoryPage() {
                 className="new-story-button"
               >
                 <ArrowLeft size={13} />
-                New Story
+                Go Back
               </Button>
             )}
           </div>
