@@ -8,4 +8,5 @@ Read [docs/product.md](docs/product.md) before changing story rules or learning 
 - Preserve resolved turns and sample each outcome once. Model or network retries must retain the committed action, answer, and outcome.
 - Keep prose in the continuous story feed. Reveal challenges after action selection and consequences after submission.
 - Run the root verification script before handing off changes. Hooks must stay enabled for commits.
+- Leave changes uncommitted for review by default. Create or amend commits only after explicit user approval for those changes.
 - Use focused commits on `dev`; `main` retains the initial infrastructure baseline until an explicit merge.
