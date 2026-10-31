@@ -1,10 +1,20 @@
 # Cloze Call
 
-A local horror-fiction prototype for conversational English practice. Choose your action, complete a narrated cloze, and discover whether you make it out.
+An interactive horror story for practising conversational English. Choose an action, fill in the missing word, and see whether you survive.
 
-## Development
+Cloze Call pairs locally generated narration with reviewed language exercises. Start with a Crystal Lake scenario or enter your own movie and situation. Each run unfolds in a continuous story feed and ends with a review of the expressions you encountered.
 
-Use Node 24 and pnpm (versions pinned in this repository).
+## How it works
+
+1. Read the scene and choose what to do next.
+2. Complete a sentence with one missing word and three possible answers.
+3. Discover the consequence: continue, escape, attempt a recovery, or meet your end.
+
+Correct answers make your chosen action succeed; chance determines whether you escape. A wrong answer can lead to a recovery challenge or death. The API controls grading and outcomes; the language model narrates the result.
+
+## Run locally
+
+Requires **Node.js 24**, **pnpm 11.8.0**, and [Ollama](https://ollama.com). Start Ollama using its app or `ollama serve`, then run:
 
 ```sh
 pnpm install
@@ -13,7 +23,13 @@ ollama pull gemma4:e4b-it-q4_K_M
 pnpm dev
 ```
 
-Open http://127.0.0.1:5173. The API listens on port 3001; Vite proxies `/api` requests. Ollama runs separately on port 11434. Start it with the Ollama app or `ollama serve`.
+Open **http://127.0.0.1:5173**. The API uses port 3001 and Ollama uses port 11434 by default; see [`.env.example`](.env.example) for configuration. The first scene can take tens of seconds while the model loads.
+
+## Development and contributions
+
+The TypeScript workspace contains a React frontend (`apps/web`), a Hono API (`apps/api`), and shared Zod schemas (`packages/shared`).
+
+Issues and pull requests are welcome. Read [AGENTS.md](AGENTS.md) and the relevant docs before making changes, keep contributions focused, and run verification before submitting:
 
 ```sh
 pnpm verify      # format/lint/types, tests, production builds
@@ -22,7 +38,11 @@ pnpm format
 pnpm --filter @cloze-call/api smoke  # real local Gemma opening and ending
 ```
 
-Husky runs static checks, type checks, and Vitest before each commit. CI runs the same checks plus production builds; model inference is not needed for tests.
+Tests use a fake narrator and do not require Ollama. The smoke test checks the real local model. Keep commit hooks enabled.
+
+## Prototype limits
+
+This is a text-only local prototype. Sessions expire after two idle hours and are lost when the API restarts. The exercise bank is small, so longer runs can repeat tasks. Narration quality and film accuracy depend on the model.
 
 ## Documentation
 
@@ -31,14 +51,7 @@ Husky runs static checks, type checks, and Vitest before each commit. CI runs th
 - [Visual and interaction design](docs/design.md)
 - [API and retry behavior](docs/api.md)
 - [Local showcase and troubleshooting](docs/showcase.md)
-- [Architecture decisions](docs/decisions/0001-typescript-workspace.md)
-- [Random resolution and exercise decisions](docs/decisions/0002-story-resolution.md)
-
-The infrastructure baseline lives on `main`; incremental prototype work lives on `dev`.
-
-The initial build includes three Crystal Lake starter prompts, procedural narration and action introductions, reviewed B1/B2 exercises, random escape/recovery/death outcomes, a continuous transcript, browser-refresh recovery, and a final vocabulary review. Images and film retrieval are intentionally deferred.
-
-Sessions live in API memory and expire after two idle hours. Restarting the API loses them; the browser stores only a run ID. The small exercise bank repeats on long runs. Gemma's prose and film fidelity remain model-dependent.
+- [Architecture decisions](docs/decisions/)
 
 ## License
 
