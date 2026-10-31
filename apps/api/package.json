@@ -1,5 +1,5 @@
 {
-  "name": "@final-cut/api",
+  "name": "@cloze-call/api",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -11,7 +11,7 @@
     "smoke": "tsx --env-file-if-exists=../../.env scripts/smoke-ollama.ts"
   },
   "dependencies": {
-    "@final-cut/shared": "workspace:*",
+    "@cloze-call/shared": "workspace:*",
     "@hono/node-server": "^1.19.11",
     "@langchain/core": "^1.1.34",
     "@langchain/ollama": "^1.2.3",

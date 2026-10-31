@@ -1,7 +1,7 @@
 import { ChatPromptTemplate } from "@langchain/core/prompts";
 import { ChatOllama } from "@langchain/ollama";
 import { z } from "zod";
-import type { ModelStatus } from "@final-cut/shared";
+import type { ModelStatus } from "@cloze-call/shared";
 import type { AppConfig } from "../config.ts";
 import { narrationSchema, type Narrator } from "../story/narrator.ts";
 

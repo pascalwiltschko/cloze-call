@@ -1,4 +1,4 @@
-import { starterPrompts } from "@final-cut/shared";
+import { starterPrompts } from "@cloze-call/shared";
 import { readConfig } from "../src/config.ts";
 import { createOllamaNarrator, getOllamaStatus } from "../src/providers/ollama.ts";
 import { StoryService } from "../src/story/service.ts";

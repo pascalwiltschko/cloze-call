@@ -4,7 +4,7 @@ import { beforeEach, describe, expect, it, vi } from "vite-plus/test";
 import { App } from "./App";
 import { api, ApiError } from "@/lib/api";
 import { storyFixture } from "@/testing/story-fixture";
-import { starterPrompts } from "@final-cut/shared";
+import { starterPrompts } from "@cloze-call/shared";
 
 vi.mock("@/lib/api", async (importOriginal) => ({
   ...(await importOriginal<typeof import("@/lib/api")>()),
@@ -84,7 +84,7 @@ describe("continuous story experience", () => {
 
   it("resumes a committed challenge after a browser refresh", async () => {
     const fixture = storyFixture();
-    localStorage.setItem("final-cut:current-story", fixture.selected.id);
+    localStorage.setItem("cloze-call:current-story", fixture.selected.id);
     vi.mocked(api.get).mockResolvedValue({
       ...fixture.selected,
       pendingOptionId: fixture.challenge.options[0]!.id,

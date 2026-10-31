@@ -1,6 +1,6 @@
 # Product contract
 
-Final Cut is interactive horror fiction for horror fans practising conversational B1/B2 English. The showcase is an original woods chase around Crystal Lake inspired by Friday the 13th Part 2, rather than a reconstruction of a particular scene.
+Cloze Call is interactive horror fiction for horror fans practising conversational B1/B2 English. The showcase is an original woods chase around Crystal Lake inspired by Friday the 13th Part 2, rather than a reconstruction of a particular scene.
 
 ## Loop
 

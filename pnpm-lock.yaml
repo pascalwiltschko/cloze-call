@@ -208,7 +208,7 @@ importers:
 
   apps/api:
     dependencies:
-      '@final-cut/shared':
+      '@cloze-call/shared':
         specifier: workspace:*
         version: link:../../packages/shared
       '@hono/node-server':
@@ -239,7 +239,7 @@ importers:
 
   apps/web:
     dependencies:
-      '@final-cut/shared':
+      '@cloze-call/shared':
         specifier: workspace:*
         version: link:../../packages/shared
       '@fontsource-variable/geist':

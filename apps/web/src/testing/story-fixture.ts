@@ -1,4 +1,4 @@
-import type { StoryRun, ChallengeEntry, SceneEntry, FeedbackEntry } from "@final-cut/shared";
+import type { StoryRun, ChallengeEntry, SceneEntry, FeedbackEntry } from "@cloze-call/shared";
 
 export function storyFixture() {
   const id = () => crypto.randomUUID();

@@ -14,7 +14,7 @@ describe("API foundation", () => {
   it("answers health checks without contacting the model", async () => {
     const response = await testApp().request("/api/health");
     expect(response.status).toBe(200);
-    expect(await response.json()).toEqual({ status: "ok", name: "Final Cut" });
+    expect(await response.json()).toEqual({ status: "ok", name: "Cloze Call" });
   });
   it("rejects malformed JSON and incomplete story descriptions", async () => {
     const app = testApp();
@@ -44,7 +44,7 @@ describe("API foundation", () => {
       json({ prompt: "An original woods chase at Crystal Lake." }),
     );
     expect(response.status).toBe(201);
-    const { runSchema } = await import("@final-cut/shared");
+    const { runSchema } = await import("@cloze-call/shared");
     const opening = runSchema.parse(await response.json());
     const scene = opening.entries[0]!;
     if (scene.kind !== "scene") throw new Error("Missing opening scene");

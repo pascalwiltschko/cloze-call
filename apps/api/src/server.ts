@@ -8,5 +8,5 @@ const config = readConfig();
 const service = new StoryService(createOllamaNarrator(config));
 const app = createApp(service, () => getOllamaStatus(config));
 serve({ fetch: app.fetch, hostname: "127.0.0.1", port: config.PORT }, (info) => {
-  console.log(`Final Cut API: http://127.0.0.1:${info.port}`);
+  console.log(`Cloze Call API: http://127.0.0.1:${info.port}`);
 });

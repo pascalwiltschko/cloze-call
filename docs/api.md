@@ -17,4 +17,4 @@ Sessions expire after two hours without access, are capped at 100, and disappear
 
 ## Live integration check
 
-With Ollama running and the model installed, run `pnpm --filter @final-cut/api smoke`. This uses real LangChain/Ollama inference for an opening and an ending. Unit and API tests use injected narration and require no model.
+With Ollama running and the model installed, run `pnpm --filter @cloze-call/api smoke`. This uses real LangChain/Ollama inference for an opening and an ending. Unit and API tests use injected narration and require no model.

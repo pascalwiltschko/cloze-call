@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ArrowRight, Check, LockKeyhole, X } from "lucide-react";
-import type { ChallengeEntry, FeedbackEntry } from "@final-cut/shared";
+import type { ChallengeEntry, FeedbackEntry } from "@cloze-call/shared";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";

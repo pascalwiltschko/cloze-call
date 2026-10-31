@@ -1,4 +1,4 @@
-# Final Cut
+# Cloze Call
 
 A local horror-fiction prototype for conversational English practice. Choose your action, complete a narrated cloze, and discover whether you make it out.
 
@@ -19,7 +19,7 @@ Open http://127.0.0.1:5173. The API listens on port 3001; Vite proxies `/api` re
 pnpm verify      # format/lint/types, tests, production builds
 pnpm test:watch
 pnpm format
-pnpm --filter @final-cut/api smoke  # real local Gemma opening and ending
+pnpm --filter @cloze-call/api smoke  # real local Gemma opening and ending
 ```
 
 Husky runs static checks, type checks, and Vitest before each commit. CI runs the same checks plus production builds; model inference is not needed for tests.

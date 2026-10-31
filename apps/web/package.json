@@ -1,5 +1,5 @@
 {
-  "name": "@final-cut/web",
+  "name": "@cloze-call/web",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -10,7 +10,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@final-cut/shared": "workspace:*",
+    "@cloze-call/shared": "workspace:*",
     "@fontsource-variable/geist": "^5.2.8",
     "@fontsource/vt323": "^5.2.7",
     "class-variance-authority": "^0.7.1",

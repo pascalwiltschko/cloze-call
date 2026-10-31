@@ -1,5 +1,5 @@
 import { ArrowUpRight, RotateCcw } from "lucide-react";
-import type { EndingEntry, FeedbackEntry } from "@final-cut/shared";
+import type { EndingEntry, FeedbackEntry } from "@cloze-call/shared";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 

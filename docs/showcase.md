@@ -9,7 +9,7 @@
 5. Confirm the desktop header says `GEMMA · LOCAL`. On small screens, offline details appear below the form if needed.
 6. Choose the woods starter, then enter the scene. Select an action, choose a word, and commit the answer.
 
-The first request may load the model into memory. Narration can take tens of seconds on the showcase machine. An action reveals its cloze immediately; the next inference happens after the answer. Keep the model warm before presenting with `pnpm --filter @final-cut/api smoke`.
+The first request may load the model into memory. Narration can take tens of seconds on the showcase machine. An action reveals its cloze immediately; the next inference happens after the answer. Keep the model warm before presenting with `pnpm --filter @cloze-call/api smoke`.
 
 ## Outcomes
 
@@ -27,11 +27,11 @@ The footer review separates language accuracy from survival. It shows expression
 
 ## Validation
 
-`pnpm verify` runs static checks, per-package TypeScript checks, Vitest, and production builds. Unit/API/browser-component tests use injected narration and controlled test rolls without requiring Ollama. `pnpm --filter @final-cut/api smoke` verifies the real model separately.
+`pnpm verify` runs static checks, per-package TypeScript checks, Vitest, and production builds. Unit/API/browser-component tests use injected narration and controlled test rolls without requiring Ollama. `pnpm --filter @cloze-call/api smoke` verifies the real model separately.
 
 Manual browser verification covers a starter, action selection, correct continuation, failed-action recovery, failed-recovery death, final vocabulary review, refresh/resume, and replay. Desktop and narrow preview layouts have been inspected.
 
-For a production-build smoke check, run `pnpm build`, `pnpm --filter @final-cut/api start`, and `pnpm --filter @final-cut/web preview` in separate terminals. This remains a local prototype, with no hosted deployment configured.
+For a production-build smoke check, run `pnpm build`, `pnpm --filter @cloze-call/api start`, and `pnpm --filter @cloze-call/web preview` in separate terminals. This remains a local prototype, with no hosted deployment configured.
 
 ## Next extensions
 

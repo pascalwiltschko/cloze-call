@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { MotionConfig } from "motion/react";
 import { ArrowLeft, Clapperboard, LoaderCircle, RefreshCw, TriangleAlert } from "lucide-react";
-import type { ModelStatus } from "@final-cut/shared";
+import type { ModelStatus } from "@cloze-call/shared";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { OpeningScreen } from "@/features/story/OpeningScreen";
@@ -47,11 +47,11 @@ export function App() {
               event.preventDefault();
               if (!busy) reset();
             }}
-            aria-label="Final Cut home"
+            aria-label="Cloze Call home"
           >
             <Clapperboard size={21} />
             <span>
-              FINAL<span className="wordmark-cut">CUT</span>
+              CLOZE<span className="wordmark-call">CALL</span>
             </span>
             <span className="wordmark-period">.</span>
           </a>

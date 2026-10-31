@@ -8,7 +8,7 @@ import {
   healthSchema,
   startStorySchema,
   type ModelStatus,
-} from "@final-cut/shared";
+} from "@cloze-call/shared";
 import { StoryError } from "./domain/errors.ts";
 import type { StoryService } from "./story/service.ts";
 
@@ -31,7 +31,7 @@ export function createApp(service: StoryService, modelStatus: () => Promise<Mode
         ),
     }),
   );
-  app.get("/api/health", (c) => c.json(healthSchema.parse({ status: "ok", name: "Final Cut" })));
+  app.get("/api/health", (c) => c.json(healthSchema.parse({ status: "ok", name: "Cloze Call" })));
   app.get("/api/model", async (c) => c.json(await modelStatus()));
   app.post("/api/stories", async (c) => {
     const { prompt } = startStorySchema.parse(await c.req.json());

@@ -1,5 +1,5 @@
 import { randomInt, randomUUID } from "node:crypto";
-import type { ChallengeEntry } from "@final-cut/shared";
+import type { ChallengeEntry } from "@cloze-call/shared";
 
 export type ChallengeTier = "low" | "medium" | "high" | "recovery";
 export interface Exercise {

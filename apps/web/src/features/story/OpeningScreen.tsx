@@ -1,5 +1,5 @@
 import { ArrowDownRight, ArrowRight, CornerDownLeft } from "lucide-react";
-import { starterPrompts } from "@final-cut/shared";
+import { starterPrompts } from "@cloze-call/shared";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";

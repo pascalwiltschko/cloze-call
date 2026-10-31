@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import type { StoryRun } from "@final-cut/shared";
+import type { StoryRun } from "@cloze-call/shared";
 import { api, ApiError } from "@/lib/api";
 
-const storageKey = "final-cut:current-story";
+const storageKey = "cloze-call:current-story";
 function readSavedId(): string | null {
   try {
     return localStorage.getItem(storageKey);

@@ -1,4 +1,4 @@
-import { apiErrorSchema, modelStatusSchema, runSchema } from "@final-cut/shared";
+import { apiErrorSchema, modelStatusSchema, runSchema } from "@cloze-call/shared";
 
 export class ApiError extends Error {
   constructor(

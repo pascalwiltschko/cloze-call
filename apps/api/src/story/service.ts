@@ -1,5 +1,5 @@
 import { randomUUID } from "node:crypto";
-import { runSchema, type FeedbackEntry, type StoryRun } from "@final-cut/shared";
+import { runSchema, type FeedbackEntry, type StoryRun } from "@cloze-call/shared";
 import { StoryError } from "../domain/errors.ts";
 import {
   createChallenge,

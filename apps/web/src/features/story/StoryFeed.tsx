@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { ArrowDownRight, ArrowRight, Check, MessageSquareText, X } from "lucide-react";
-import type { FeedbackEntry, StoryRun } from "@final-cut/shared";
+import type { FeedbackEntry, StoryRun } from "@cloze-call/shared";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ChallengeView } from "./ChallengeView";

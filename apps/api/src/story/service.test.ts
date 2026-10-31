@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from "vite-plus/test";
-import type { ChallengeEntry, SceneEntry, StoryRun } from "@final-cut/shared";
+import type { ChallengeEntry, SceneEntry, StoryRun } from "@cloze-call/shared";
 import type { NarrationRequest, Narrator } from "./narrator.ts";
 import { StoryService } from "./service.ts";
 

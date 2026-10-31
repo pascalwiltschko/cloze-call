@@ -1,4 +1,4 @@
-# Working on Final Cut
+# Working on Cloze Call
 
 Read [docs/product.md](docs/product.md) before changing story rules or learning behavior. Read [docs/architecture.md](docs/architecture.md) before adding packages, API routes, or model integrations. Read [docs/design.md](docs/design.md) before changing the interface. Record significant trade-offs in `docs/decisions/`.
 
